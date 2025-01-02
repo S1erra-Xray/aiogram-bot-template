@@ -12,7 +12,6 @@ RUN pip install poetry \
 	&& poetry config virtualenvs.create false \
 	&& poetry install
 
-CMD ["sleep", "10000"]
 CMD ["sh", "-c", "poetry run python /home/$proj_name/bot.py"]
 
 
