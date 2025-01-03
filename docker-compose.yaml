@@ -18,5 +18,5 @@ services:
       - docker-files/main_image.env
     depends_on:
       - base
-#    ports:
-#      - 6379:6379
+    ports:
+      - 6379:6379
