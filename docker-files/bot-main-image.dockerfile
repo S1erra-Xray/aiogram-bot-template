@@ -1,15 +1,13 @@
 FROM bot-base-image:latest
 LABEL authors="S1erra-Xray"
 
-CMD redis-server
-
 ENV directory="aiogram_bot_template"
 
 WORKDIR /home/$directory/$directory
 
 COPY $directory/ ./
-COPY [ "poetry.lock", "pyproject.toml", ".env", "bot.py", "../" ]
+COPY [ "poetry.lock", "pyproject.toml", "bot.env", "bot.py", "../" ]
 
-CMD redis-server \
-	&& poetry run python /home/$directory/bot.py
+RUN redis-server &
+CMD poetry run python /home/$directory/bot.py
 

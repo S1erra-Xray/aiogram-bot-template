@@ -14,9 +14,8 @@ services:
     build:
       context: .
       dockerfile: docker-files/bot-main-image.dockerfile
-    environment:
-      - POETRY_VIRTUALENVS_CREATE=false
-      - POSTGRES_HOST_AUTH_METHOD=trust
+    env_file:
+      - docker-files/main_image.env
     depends_on:
       - base
 #    ports:

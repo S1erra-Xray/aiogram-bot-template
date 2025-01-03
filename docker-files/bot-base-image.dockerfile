@@ -6,4 +6,5 @@ WORKDIR /tmp
 ADD poetry.lock .
 ADD pyproject.toml .
 RUN rm /usr/lib/python3.*/EXTERNALLY-MANAGED \
-	&& poetry install
+    && poetry export --without-hashes --format=requirements.txt > requirements.txt \
+	&& pip install -r requirements.txt
