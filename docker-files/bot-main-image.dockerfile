@@ -3,7 +3,7 @@ LABEL authors="S1erra-Xray"
 
 CMD redis-server
 
-ENV directory="TGBot"
+ENV directory="aiogram_bot_template"
 
 WORKDIR /home/$directory/$directory
 
