@@ -1,0 +1,21 @@
+version: "3.8"
+services:
+  base:
+    container_name: bot-base-image
+    build:
+      context: .
+      dockerfile: docker-files/bot-base-image.dockerfile
+    environment:
+      - POETRY_VIRTUALENVS_CREATE=false
+  bot:
+    container_name: bot-main-image
+    build:
+      context: .
+      dockerfile: docker-files/bot-main-image.dockerfile
+    environment:
+      - POETRY_VIRTUALENVS_CREATE=false
+      - POSTGRES_HOST_AUTH_METHOD=trust
+    depends_on:
+      - base
+    ports:
+      - 6379:6379
