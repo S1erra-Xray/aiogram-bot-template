@@ -1,4 +1,4 @@
-version: "3.8"
+#version: "3.8"
 services:
   base:
     container_name: bot-base-image
@@ -17,5 +17,5 @@ services:
       - POSTGRES_HOST_AUTH_METHOD=trust
     depends_on:
       - base
-    ports:
-      - 6379:6379
+#    ports:
+#      - 6379:6379
