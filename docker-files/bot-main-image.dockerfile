@@ -3,13 +3,13 @@ LABEL authors="S1erra-Xray"
 
 CMD redis-server
 
-ENV proj_name="aiogram_bot_template"
+ENV directory="TGBot"
 
-WORKDIR /home/$proj_name/$proj_name
+WORKDIR /home/$directory/$directory
 
-COPY $proj_name/ ./
+COPY $directory/ ./
 COPY [ "poetry.lock", "pyproject.toml", ".env", "bot.py", "../" ]
 
 CMD redis-server \
-	&& poetry run python /home/$proj_name/bot.py
+	&& poetry run python /home/$directory/bot.py
 
