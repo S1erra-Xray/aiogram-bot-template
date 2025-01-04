@@ -1,24 +1,18 @@
 # aiogram-bot-template
+
 Template for creating scalable bots with aiogram
 
 # Start develop
 
-Before starting your own project, run configuration script for your OS
-
-## On Windows
+Before starting your own project, init it
 
 ```shell
-.\configure_win.bat
+poetry run python infra/scripts/init_project.py
 ```
 
-## On Linux
+# Using linters and static code analyzers
 
-```shell
-sh configure_linux.sh
-```
+If you want to use formatters or code analyzers such as **black** or mypy, install it manualy by pip in system-wide
+python interpreter and configure your IDE for its usage.
 
-Or
-
-```shell
-make Makefile
-```
+**ADVICE**: dont install linters and static code analyzers into docker, because it decreases performance
