@@ -6,8 +6,6 @@ services:
     build:
       context: .
       dockerfile: docker-files/bot-base-image.dockerfile
-    environment:
-      - POETRY_VIRTUALENVS_CREATE=false
   bot:
     image: bot-main-image:latest
     container_name: bot-main-container
