@@ -1,5 +1,5 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="Debug" type="PythonConfigurationType" factoryName="Python">
+  <configuration default="false" name="Docker debug" type="PythonConfigurationType" factoryName="Python">
     <module name="aiogram-bot-template" />
     <option name="ENV_FILES" value="" />
     <option name="INTERPRETER_OPTIONS" value="" />
