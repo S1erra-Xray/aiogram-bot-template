@@ -1,0 +1,19 @@
+#version: "3.8"
+services:
+  bot:
+    image: bot-release-image:latest
+    container_name: bot-release-container
+    build:
+      context: ../..
+      dockerfile: release-image.dockerfile
+    env_file:
+      - release_image.env
+    ports:
+      - "6379:6379"
+      - "5432:5432"
+
+#    volumes:
+#      -
+
+
+# TODO: сделать настройку volumes

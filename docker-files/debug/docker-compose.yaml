@@ -1,0 +1,21 @@
+#version: "3.8"
+services:
+  base:
+    image: base-debug-image:latest
+    container_name: base-debug-container
+    build:
+      context: ../..
+      dockerfile: base-debug-image.dockerfile
+  bot:
+    image: main-debug-image:latest
+    container_name: main-debug-container
+    build:
+      context: ../..
+      dockerfile: main-debug-image.dockerfile
+    env_file:
+      - main_debug_image.env
+    depends_on:
+      - base
+    ports:
+      - "6379:6379"
+      - "5432:5432"
