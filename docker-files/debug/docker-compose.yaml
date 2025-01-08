@@ -5,13 +5,13 @@ services:
     container_name: base-debug-container
     build:
       context: ../..
-      dockerfile: base-debug-image.dockerfile
+      dockerfile: docker-files/debug/base-debug-image.dockerfile
   bot:
     image: main-debug-image:latest
     container_name: main-debug-container
     build:
       context: ../..
-      dockerfile: main-debug-image.dockerfile
+      dockerfile: docker-files/debug/main-debug-image.dockerfile
     env_file:
       - main_debug_image.env
     depends_on:

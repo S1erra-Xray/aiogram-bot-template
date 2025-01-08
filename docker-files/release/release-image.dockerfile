@@ -1,21 +1,22 @@
 FROM postgres:17.2-alpine3.21
 LABEL authors="S1erra-Xray"
 
-ADD poetry.lock ./ \
-	pyproject.toml ./ \
-	poetry.toml ./
+RUN apk --update add redis python3 poetry
 
-RUN apk --update add redis python3 poetry \
-    && rm /usr/lib/python3.*/EXTERNALLY-MANAGED \
-    && poetry install \
-    && redis-server &
+ENV directory="aiogram_bot_template"
 
-ARG directory="aiogram_bot_template"
-WORKDIR /home/$directory/$directory
+WORKDIR /home/bot
 
-COPY $directory/ ./ \
-	 bot.py ../
+ADD poetry.lock ./
+ADD	pyproject.toml ./
+ADD	poetry.toml ./
 
-COPY bot_env/bot_release.env ../bot.env
+RUN rm /usr/lib/python3.*/EXTERNALLY-MANAGED
+RUN poetry install
+RUN redis-server &
 
-CMD poetry run python /home/$directory/bot.py
+ADD $directory ./$directory
+ADD bot.py ./
+ADD bot_env/bot_release.env ./bot.env
+
+CMD poetry run python /home/bot/bot.py

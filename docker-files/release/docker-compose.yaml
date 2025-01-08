@@ -5,7 +5,7 @@ services:
     container_name: bot-release-container
     build:
       context: ../..
-      dockerfile: release-image.dockerfile
+      dockerfile: docker-files/release/release-image.dockerfile
     env_file:
       - release_image.env
     ports:

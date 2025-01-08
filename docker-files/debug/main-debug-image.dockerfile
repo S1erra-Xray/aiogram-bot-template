@@ -1,15 +1,15 @@
 FROM base-debug-image:latest
 LABEL authors="S1erra-Xray"
 
-ARG directory="aiogram_bot_template"
+ENV directory="aiogram_bot_template"
 
-WORKDIR /home/$directory/$directory
+WORKDIR /home/bot
 
-COPY $directory/ ./ \
-	 bot.py ../
-
-COPY bot_env/bot_debug.env ../bot.env
+ADD $directory ./$directory
+ADD	bot.py ./
+ADD bot_env/bot_debug.env ./bot.env
 
 RUN redis-server &
-CMD poetry run python /home/$directory/bot.py
+
+CMD poetry run python /home/bot/bot.py
 
