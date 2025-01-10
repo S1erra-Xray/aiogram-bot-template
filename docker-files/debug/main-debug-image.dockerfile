@@ -9,7 +9,4 @@ ADD $directory ./$directory
 ADD	bot.py ./
 ADD bot_env/bot_debug.env ./bot.env
 
-RUN redis-server &
-
-CMD poetry run python /home/bot/bot.py
-
+#CMD sleep 10000

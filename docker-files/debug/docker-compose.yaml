@@ -16,6 +16,9 @@ services:
       - main_debug_image.env
     depends_on:
       - base
+    command:
+      - redis-server --daemonize yes
+      - poetry run python /home/bot/bot.py
     ports:
       - "6379:6379"
       - "5432:5432"
