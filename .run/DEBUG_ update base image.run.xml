@@ -3,12 +3,13 @@
     <deployment type="docker-compose.yml">
       <settings>
         <option name="envFilePath" value="" />
+        <option name="removeVolumesOnComposeDown" value="true" />
         <option name="services">
           <list>
             <option value="base" />
           </list>
         </option>
-        <option name="sourceFilePath" value="docker-files/debug/docker-compose.yaml" />
+        <option name="sourceFilePath" value="docker-files/debug/compose-debug.yaml" />
       </settings>
     </deployment>
     <method v="2">

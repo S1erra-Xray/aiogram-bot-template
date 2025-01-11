@@ -8,7 +8,7 @@
             <option value="bot" />
           </list>
         </option>
-        <option name="sourceFilePath" value="docker-files/release/docker-compose.yaml" />
+        <option name="sourceFilePath" value="docker-files/release/compose-release.yaml" />
       </settings>
     </deployment>
     <method v="2">
