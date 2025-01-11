@@ -13,7 +13,12 @@ function pg_init_and_start() {
 if [[ $TYPE == "debug" ]]; then
 	pg_init_and_start
 elif [[ $TYPE == "release" ]]; then
-	pg_init_and_start
+	chown postgres:postgres "$PGDATA"
+	if [ -z "$( ls -A "$PGDATA" )" ]; then
+		pg_init_and_start
+	else
+		exec_pg_user "pg_ctl start"
+	fi
 	poetry run python /home/bot/bot.py
 #	exec_pg_user "psql -U postgres -W"
 fi
