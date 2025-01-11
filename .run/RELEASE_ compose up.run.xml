@@ -5,14 +5,12 @@
         <option name="envFilePath" value="" />
         <option name="services">
           <list>
-            <option value="bot" />
+            <option value="release" />
           </list>
         </option>
-        <option name="sourceFilePath" value="docker-files/release/compose-release.yaml" />
+        <option name="sourceFilePath" value="docker-files/docker-compose.yaml" />
       </settings>
     </deployment>
-    <method v="2">
-      <option name="ToolBeforeRunTask" enabled="true" actionId="Tool_Внешие инструменты_del docker release image" />
-    </method>
+    <method v="2" />
   </configuration>
 </component>
