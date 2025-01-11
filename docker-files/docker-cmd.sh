@@ -14,8 +14,8 @@ if [[ $TYPE == "debug" ]]; then
 	pg_init_and_start
 elif [[ $TYPE == "release" ]]; then
 	pg_init_and_start
+	poetry run python /home/bot/bot.py
 #	exec_pg_user "psql -U postgres -W"
 fi
 
-poetry run python /home/bot/bot.py
 sleep 100000
