@@ -11,7 +11,7 @@ from aiogram.fsm.storage.redis import DefaultKeyBuilder, RedisStorage
 from aiohttp import web
 from redis.asyncio import Redis
 
-from aiogram_bot_template import handlers, utils, web_handlers
+from aiogram_bot_template import (filters, handlers, remove_commands, set_default_commands, utils, web_handlers)
 from aiogram_bot_template.data import config
 from aiogram_bot_template.middlewares import StructLoggingMiddleware
 
@@ -91,7 +91,12 @@ async def close_db_connections(dp: Dispatcher) -> None:
 
 
 def setup_handlers(dp: Dispatcher) -> None:
-    dp.include_router(handlers.user.prepare_router())
+    dp.include_router(handlers.user.prepare_user_handler_router())
+    dp.include_router(handlers.admin.prepare_admin_handler_router())
+
+
+def setup_filters(dp: Dispatcher) -> None:
+    dp.include_router(filters.prepare_filter_router())
 
 
 def setup_middlewares(dp: Dispatcher) -> None:
@@ -111,6 +116,7 @@ async def setup_aiogram(dp: Dispatcher) -> None:
     logger.debug("Configuring aiogram")
     await create_db_connections(dp)
     setup_handlers(dp)
+    setup_filters(dp)
     setup_middlewares(dp)
     logger.info("Configured aiogram")
 
@@ -168,6 +174,7 @@ async def aiogram_on_shutdown_webhook(dispatcher: Dispatcher, bot: Bot) -> None:
 async def aiogram_on_startup_polling(dispatcher: Dispatcher, bot: Bot) -> None:
     if config.DROP_PREVIOUS_UPDATES:
         await bot.delete_webhook(drop_pending_updates=True)
+    await set_default_commands(bot)
     await setup_aiogram(dispatcher)
     dispatcher["aiogram_logger"].info("Started polling")
 
@@ -175,6 +182,7 @@ async def aiogram_on_startup_polling(dispatcher: Dispatcher, bot: Bot) -> None:
 async def aiogram_on_shutdown_polling(dispatcher: Dispatcher, bot: Bot) -> None:
     dispatcher["aiogram_logger"].debug("Stopping polling")
     await close_db_connections(dispatcher)
+    await remove_commands(bot)
     await bot.session.close()
     await dispatcher.storage.close()
     dispatcher["aiogram_logger"].info("Stopped polling")

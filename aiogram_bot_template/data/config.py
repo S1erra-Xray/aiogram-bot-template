@@ -1,4 +1,4 @@
-import subprocess  # noqa: S404
+from pathlib import Path
 
 from environs import Env
 
@@ -7,6 +7,8 @@ from environs import Env
 #     .strip()
 #     .decode()
 # )
+
+DIR = Path(__file__).absolute().parent.parent
 
 env = Env()
 env.read_env("bot.env")
@@ -21,6 +23,10 @@ PG_PORT: int = env.int("PG_PORT")
 PG_USER: str = env.str("PG_USER")
 PG_PASSWORD: str = env.str("PG_PASSWORD")
 PG_DATABASE: str = env.str("PG_DATABASE")
+
+DB_URI = env.str("DB_URI", default="sqlite+aiosqlite:///database.sqlite3")
+if PG_HOST and PG_PORT and PG_USER and PG_PASSWORD and PG_DATABASE:
+    DB_URI = f"postgresql+asyncpg://{PG_USER}:{PG_PASSWORD}@{PG_HOST}:{PG_PORT}/{PG_DATABASE}"
 
 FSM_HOST: str = env.str("FSM_HOST")
 FSM_PORT: int = env.int("FSM_PORT")
@@ -52,3 +58,6 @@ if USE_CUSTOM_API_SERVER:
     CUSTOM_API_SERVER_FILE: str = env.str("CUSTOM_API_SERVER_FILE")
 
 DROP_PREVIOUS_UPDATES: bool = env.bool("DROP_PREVIOUS_UPDATES", False)
+
+I18N_PATH = f"{DIR}/data/locales"
+I18N_DOMAIN = env.str("I18N_DOMAIN", "bot")
