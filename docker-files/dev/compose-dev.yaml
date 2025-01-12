@@ -1,0 +1,47 @@
+#version: "3.8"
+services:
+  bot:
+    image: bot-dev:latest
+    container_name: bot-dev-container
+    build:
+      context: ../..
+      dockerfile: docker-files/dev/bot-dev.dockerfile
+    volumes:
+      - ../..:/home/bot:rw
+    depends_on:
+      - redis
+      - postgres
+
+  redis:
+    image: redis:alpine
+    container_name: redis-bot-dev
+    restart: always
+    command: redis-server # --save 20 1 --loglevel info  --requirepass eYVX7EwVmmxKPCDmwMtyKVge8oLd2t81
+    env_file:
+      - redis_dev.env
+    ports:
+      - '6666:6666'
+    volumes:
+      - redis_dev_data:/data
+
+  postgres:
+    image: postgres:alpine
+    container_name: postgres-bot-dev
+    restart: always
+    #    command:
+    env_file:
+      - postgres_dev.env
+    ports:
+      - '5555:5555'
+    volumes:
+      - postgres_dev_data:/var/lib/postgresql/data
+
+volumes:
+  redis_dev_data:
+    driver: local
+  postgres_dev_data:
+    driver: local
+
+
+
+
