@@ -1,4 +1,5 @@
 #version: "3.8"
+
 services:
   bot:
     image: bot-dev:latest
@@ -6,33 +7,36 @@ services:
     build:
       context: ../..
       dockerfile: docker-files/dev/bot-dev.dockerfile
+    networks:
+      - bot
     volumes:
       - ../..:/home/bot:rw
     depends_on:
-      - redis
+      - fsm
       - postgres
 
-  redis:
+  fsm:
     image: redis:alpine
     container_name: redis-bot-dev
+    hostname: fsm
     restart: always
     command: redis-server # --save 20 1 --loglevel info  --requirepass eYVX7EwVmmxKPCDmwMtyKVge8oLd2t81
     env_file:
       - redis_dev.env
-    ports:
-      - '6666:6666'
+    networks:
+      - bot
     volumes:
       - redis_dev_data:/data
 
   postgres:
     image: postgres:alpine
     container_name: postgres-bot-dev
+    hostname: postgres
     restart: always
-    #    command:
     env_file:
       - postgres_dev.env
-    ports:
-      - '5555:5555'
+    networks:
+      - bot
     volumes:
       - postgres_dev_data:/var/lib/postgresql/data
 
@@ -42,6 +46,6 @@ volumes:
   postgres_dev_data:
     driver: local
 
-
-
-
+networks:
+  bot:
+    driver: bridge

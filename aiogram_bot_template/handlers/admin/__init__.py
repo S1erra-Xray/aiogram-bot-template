@@ -2,7 +2,7 @@ from aiogram import Router
 from aiogram.filters import Command
 
 from aiogram_bot_template.filters import ChatTypeFilter, StatusFilter
-from users import _users
+from .users import _users
 
 
 def prepare_admin_handler_router() -> Router:

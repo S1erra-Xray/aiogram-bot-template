@@ -11,7 +11,14 @@ from aiogram.fsm.storage.redis import DefaultKeyBuilder, RedisStorage
 from aiohttp import web
 from redis.asyncio import Redis
 
-from aiogram_bot_template import (filters, handlers, remove_commands, set_default_commands, utils, web_handlers)
+from aiogram_bot_template import (
+    filters,
+    handlers,
+    remove_commands,
+    set_default_commands,
+    utils,
+    web_handlers,
+)
 from aiogram_bot_template.data import config
 from aiogram_bot_template.middlewares import StructLoggingMiddleware
 

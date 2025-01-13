@@ -9,7 +9,7 @@ from sqlalchemy.ext.asyncio import (
     AsyncSession,
     create_async_engine,
 )
-from sqlalchemy.orm import DeclarativeBase
+from sqlalchemy.orm import DeclarativeBase, Mapped
 
 from aiogram_bot_template.data.config import DB_URI
 
@@ -32,42 +32,45 @@ class Base(AsyncAttrs, DeclarativeBase):
 
 class BaseModel(Base):
     __abstract__ = True
+    id: Mapped[int]
 
     def to_dict(self):
         return {c.key: getattr(self, c.key) for c in self.__table__.columns}
 
     @classmethod
-    async def get_all(cls, session: AsyncSession):
-        stmt = select(cls)
+    async def get_all(self, session: AsyncSession):
+        stmt = select(self)
         objs = (await session.scalars(stmt)).all()
         session.expunge_all()
         return objs
 
     @classmethod
-    async def get(cls, session: AsyncSession, id: int):
-        stmt = select(cls).where(cls.id == id)
+    async def get(self, session: AsyncSession, id: int):
+        stmt = select(self).where(self.id == id)
         obj = await session.scalar(stmt)
         session.expunge_all()
         return obj
 
     @classmethod
-    async def get_by(cls, session: AsyncSession, **kwargs):
-        stmt = select(cls).where(and_(getattr(cls, k) == v for k, v in kwargs.items()))
+    async def get_by(self, session: AsyncSession, **kwargs):
+        stmt = select(self).where(
+            and_(getattr(self, k) == v for k, v in kwargs.items())
+        )
         obj = await session.scalar(stmt)
         session.expunge_all()
         return obj
 
     @classmethod
-    async def create(cls, session: AsyncSession, **kwargs):
-        obj = cls(**kwargs)
+    async def create(self, session: AsyncSession, **kwargs):
+        obj = self(**kwargs)
         session.add(obj)
         await session.flush()
         session.expunge_all()
         return obj
 
     @classmethod
-    async def update(cls, session: AsyncSession, id: int, **kwargs):
-        if obj := await cls.get(session, id):
+    async def update(self, session: AsyncSession, id: int, **kwargs):
+        if obj := await self.get(session, id):
             for key, value in kwargs.items():
                 setattr(obj, key, value)
             await session.flush()
