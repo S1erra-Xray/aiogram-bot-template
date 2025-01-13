@@ -3,8 +3,7 @@ LABEL authors="S1erra-Xray"
 
 RUN apk --update add poetry
 
-ENV directory="aiogram_bot_template"
-ENV TYPE="release"
+ARG directory="aiogram_bot_template"
 
 WORKDIR /home/bot
 
