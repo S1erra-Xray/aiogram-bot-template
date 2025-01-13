@@ -17,7 +17,7 @@ services:
     container_name: redis-bot-prod
     hostname: fsm
     restart: always
-    command: redis-server # --save 20 1 --loglevel info  --requirepass eYVX7EwVmmxKPCDmwMtyKVge8oLd2t81
+    command: redis-server --requirepass l4XeAeCn4RYOg0E7 # --save 20 1 --loglevel info
     env_file:
       - redis_prod.env
     networks:
