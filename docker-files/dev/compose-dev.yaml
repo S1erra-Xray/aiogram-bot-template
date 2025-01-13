@@ -18,12 +18,11 @@ services:
     container_name: redis-bot-dev
     hostname: fsm
     restart: always
-    command: redis-server # --save 20 1 --loglevel info
-    env_file:
-      - redis_dev.env
+    command: redis-server /etc/redis.conf # --save 20 1 --loglevel info
     ports:
       - '5190:6379'
     volumes:
+      - ./redis-fsm-dev.conf:/etc/redis.conf
       - redis_dev_data:/data
 
   postgres:
@@ -31,11 +30,15 @@ services:
     container_name: postgres-bot-dev
     hostname: postgres
     restart: always
-    env_file:
-      - postgres_dev.env
+    command: postgres -c config_file=/etc/postgresql.conf
+    environment:
+      - PGDATA=/var/lib/postgresql/data
+      - POSTGRES_HOST_AUTH_METHOD=trust
+      - POSTGRES_DB=bot_dev_db
     ports:
       - '7920:5432'
     volumes:
+      - ./postgresql-dev.conf:/etc/postgresql.conf
       - postgres_dev_data:/var/lib/postgresql/data
 
 volumes:
@@ -43,7 +46,3 @@ volumes:
     driver: local
   postgres_dev_data:
     driver: local
-
-#networks:
-#  bot:
-#    driver: host
