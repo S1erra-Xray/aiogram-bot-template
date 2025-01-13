@@ -6,8 +6,6 @@ services:
     build:
       context: ../..
       dockerfile: docker-files/prod/bot-prod.dockerfile
-    networks:
-      - bot
     depends_on:
       - fsm
       - postgres
@@ -20,8 +18,8 @@ services:
     command: redis-server --requirepass l4XeAeCn4RYOg0E7 # --save 20 1 --loglevel info
     env_file:
       - redis_prod.env
-    networks:
-      - bot
+    ports:
+      - '5201:6379'
     volumes:
       - redis_prod_data:/data
 
@@ -32,9 +30,8 @@ services:
     restart: always
     env_file:
       - postgres_prod.env
-    networks:
-      - bot
-    
+    ports:
+      - '6549:5432'
     volumes:
       - postgres_prod_data:/var/lib/postgresql/data
 
@@ -43,7 +40,3 @@ volumes:
     driver: local
   postgres_prod_data:
     driver: local
-
-networks:
-  bot:
-    driver: bridge
