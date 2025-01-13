@@ -5,7 +5,6 @@ RUN apk --update add poetry
 
 ENV directory="aiogram_bot_template"
 ENV TYPE="release"
-ENV cmd_file="docker-cmd.sh"
 
 WORKDIR /home/bot
 
