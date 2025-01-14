@@ -110,6 +110,7 @@ env.bak/
 venv.bak/
 env
 .env
+bot.env
 
 
 # Spyder project settings
@@ -133,3 +134,4 @@ dmypy.json
 .idea/
 .ruff_cache/
 .vscode/
+

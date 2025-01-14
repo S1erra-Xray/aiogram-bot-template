@@ -3,7 +3,7 @@
 services:
   bot:
     image: bot-dev:latest
-    container_name: bot-dev-container
+    container_name: bot-dev
     build:
       context: ../..
       dockerfile: docker-files/dev/bot-dev.dockerfile

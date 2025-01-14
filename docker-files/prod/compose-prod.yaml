@@ -2,7 +2,7 @@
 services:
   bot:
     image: bot-prod:latest
-    container_name: bot-prod-container
+    container_name: bot-prod
     build:
       context: ../..
       dockerfile: docker-files/prod/bot-prod.dockerfile
