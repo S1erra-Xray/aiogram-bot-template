@@ -15,10 +15,10 @@ services:
 
   fsm:
     image: redis:alpine
-    container_name: fsm-redis-dev
+    container_name: redis-fsm-dev
     hostname: fsm
     restart: always
-    command: redis-server /etc/redis.conf # --save 20 1 --loglevel info
+    command: redis-server # /etc/redis.conf # --save 20 1 --loglevel info
     ports:
       - '5190:6379'
     volumes:
