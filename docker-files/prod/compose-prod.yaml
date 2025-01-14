@@ -12,7 +12,7 @@ services:
 
   fsm:
     image: redis:alpine
-    container_name: redis-bot-prod
+    container_name: fsm-redis-prod
     hostname: fsm
     restart: always
     command: redis-server /etc/redis.conf # --requirepass l4XeAeCn4RYOg0E7 # --save 20 1 --loglevel info
@@ -24,7 +24,7 @@ services:
 
   postgres:
     image: postgres:alpine
-    container_name: postgres-bot-prod
+    container_name: postgres-prod
     hostname: postgres
     restart: always
     command: postgres -c config_file=/etc/postgresql.conf
