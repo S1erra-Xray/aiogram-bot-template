@@ -1,18 +1,6 @@
 #version: "3.8"
 
 services:
-  bot:
-    image: bot-dev:latest
-    container_name: bot-dev
-    build:
-      context: ../..
-      dockerfile: docker-files/dev/bot-dev.dockerfile
-    volumes:
-      - ../..:/home/bot:rw
-    depends_on:
-      - fsm
-      - postgres
-
   fsm:
     image: redis:alpine
     container_name: redis-fsm-dev
@@ -20,7 +8,7 @@ services:
     restart: always
     command: redis-server # /etc/redis.conf # --save 20 1 --loglevel info
     ports:
-      - '5190:6379'
+      - '6379:6379'
     volumes:
       - ./redis-fsm-dev.conf:/etc/redis.conf
       - redis_dev_data:/data
@@ -36,7 +24,7 @@ services:
       - POSTGRES_HOST_AUTH_METHOD=trust
       - POSTGRES_DB=bot_dev_db
     ports:
-      - '7920:5432'
+      - '5432:5432'
     volumes:
       - ./postgresql-dev.conf:/etc/postgresql.conf
       - postgres_dev_data:/var/lib/postgresql/data

@@ -6,6 +6,8 @@ services:
     build:
       context: ../..
       dockerfile: docker-files/prod/bot-prod.dockerfile
+    environment:
+      - POETRY_VIRTUALENVS_CREATE=false
     depends_on:
       - fsm
       - postgres

@@ -13,6 +13,6 @@ RUN rm /usr/lib/python3.*/EXTERNALLY-MANAGED &>/dev/null; \
 
 COPY $directory ./$directory
 COPY bot.py ./
-COPY bot_env/bot_prod.env ./bot.env
+COPY bot_prod.env ./bot.env
 
 CMD poetry run python bot.py
