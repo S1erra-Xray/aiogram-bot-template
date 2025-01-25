@@ -7,7 +7,7 @@ Template for creating scalable bots with aiogram
 Before starting your own project, init it
 
 ```shell
-poetry run python infra/scripts/init_project.py
+poetry install
 ```
 
 # Using linters and static code analyzers
