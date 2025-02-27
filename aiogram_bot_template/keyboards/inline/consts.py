@@ -3,12 +3,12 @@ from typing import TypeVar
 
 from aiogram.filters.callback_data import CallbackData
 from aiogram.types import (
-	CallbackGame,
-	InlineKeyboardButton,
-	InlineKeyboardMarkup,
-	LoginUrl,
-	SwitchInlineQueryChosenChat,
-	WebAppInfo,
+    CallbackGame,
+    InlineKeyboardButton,
+    InlineKeyboardMarkup,
+    LoginUrl,
+    SwitchInlineQueryChosenChat,
+    WebAppInfo,
 )
 
 from aiogram_bot_template import exceptions

@@ -2,12 +2,12 @@ from collections.abc import Sequence
 from types import MappingProxyType
 
 from aiogram.types import (
-	KeyboardButton,
-	KeyboardButtonPollType,
-	KeyboardButtonRequestChat,
-	KeyboardButtonRequestUsers,
-	ReplyKeyboardMarkup,
-	WebAppInfo,
+    KeyboardButton,
+    KeyboardButtonPollType,
+    KeyboardButtonRequestChat,
+    KeyboardButtonRequestUsers,
+    ReplyKeyboardMarkup,
+    WebAppInfo,
 )
 
 from aiogram_bot_template import exceptions
