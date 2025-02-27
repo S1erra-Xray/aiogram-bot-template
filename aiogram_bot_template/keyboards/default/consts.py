@@ -2,16 +2,17 @@ from collections.abc import Sequence
 from types import MappingProxyType
 
 from aiogram.types import (
-    KeyboardButton,
-    KeyboardButtonPollType,
-    KeyboardButtonRequestChat,
-    KeyboardButtonRequestUsers,
-    ReplyKeyboardMarkup,
-    WebAppInfo,
+	KeyboardButton,
+	KeyboardButtonPollType,
+	KeyboardButtonRequestChat,
+	KeyboardButtonRequestUsers,
+	ReplyKeyboardMarkup,
+	WebAppInfo,
 )
 
 from aiogram_bot_template import exceptions
 from aiogram_bot_template.keyboards.keyboard_utils import schema_generator
+
 
 POSSIBLE_BUTTON_PROPERTIES_VALUES = (  # https://core.telegram.org/bots/api#keyboardbutton
     str

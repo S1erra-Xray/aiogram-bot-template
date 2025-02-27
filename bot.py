@@ -5,7 +5,6 @@ import aiojobs
 import orjson
 import tenacity
 from aiogram import Bot, Dispatcher
-from aiogram.client.default import DefaultBotProperties
 from aiogram.client.telegram import TelegramAPIServer
 from aiogram.fsm.storage.redis import DefaultKeyBuilder, RedisStorage
 from aiohttp import web
@@ -20,7 +19,9 @@ from aiogram_bot_template import (
     web_handlers,
 )
 from aiogram_bot_template.data import config
+from aiogram_bot_template.loader import aiogram_session_logger, bot
 from aiogram_bot_template.middlewares import StructLoggingMiddleware
+
 
 if TYPE_CHECKING:
     import asyncpg as asyncpg
@@ -218,29 +219,6 @@ async def setup_aiohttp_app(  # noqa: RUF029
 
 
 def main() -> None:
-    aiogram_session_logger = utils.logging.setup_logger().bind(type="aiogram_session")
-
-    if config.USE_CUSTOM_API_SERVER:
-        session = utils.smart_session.SmartAiogramAiohttpSession(
-            api=TelegramAPIServer(
-                base=config.CUSTOM_API_SERVER_BASE,
-                file=config.CUSTOM_API_SERVER_FILE,
-                is_local=config.CUSTOM_API_SERVER_IS_LOCAL,
-            ),
-            json_loads=orjson.loads,
-            logger=aiogram_session_logger,
-        )
-    else:
-        session = utils.smart_session.SmartAiogramAiohttpSession(
-            json_loads=orjson.loads,
-            logger=aiogram_session_logger,
-        )
-    bot = Bot(
-        config.BOT_TOKEN,
-        session=session,
-        default=DefaultBotProperties(parse_mode="HTML"),
-    )
-
     dp = Dispatcher(
         storage=RedisStorage(
             redis=Redis(

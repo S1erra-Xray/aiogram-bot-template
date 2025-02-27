@@ -8,6 +8,7 @@ import structlog.typing
 from aiogram import BaseMiddleware
 from aiogram.types import TelegramObject, Update
 
+
 HANDLED_STR = ["Unhandled", "Handled"]
 
 

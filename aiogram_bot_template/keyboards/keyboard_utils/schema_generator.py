@@ -3,6 +3,7 @@ from typing import TypeVar
 
 from aiogram_bot_template import exceptions
 
+
 T = TypeVar("T")
 
 

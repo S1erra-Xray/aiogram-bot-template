@@ -12,7 +12,8 @@ class TextFilter(BaseFilter):
     async def __call__(self, obj: Message | CallbackQuery) -> bool:
         if isinstance(obj, Message):
             txt = obj.text or obj.caption
-            return any(i == txt for i in self.text)
+            result = any(i == txt for i in self.text)
+            return result
         if isinstance(obj, CallbackQuery):
             return obj.data in self.text
         return False

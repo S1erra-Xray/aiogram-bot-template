@@ -8,6 +8,7 @@ from aiohttp import web
 
 from aiogram_bot_template.data import config
 
+
 if TYPE_CHECKING:
     import aiojobs
 

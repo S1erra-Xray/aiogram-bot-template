@@ -2,6 +2,7 @@ from pathlib import Path
 
 from environs import Env
 
+
 # VERSION = (
 #     subprocess.check_output(["git", "describe", "--always"])  # noqa: S603,S607
 #     .strip()
@@ -61,3 +62,4 @@ DROP_PREVIOUS_UPDATES: bool = env.bool("DROP_PREVIOUS_UPDATES", False)
 
 I18N_PATH = f"{DIR}/data/locales"
 I18N_DOMAIN = env.str("I18N_DOMAIN", "bot")
+BOT_ADMIN_USER_ID: list[int] = env.list("BOT_ADMIN_USER_ID")

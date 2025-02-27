@@ -1,6 +1,6 @@
 from aiogram.types import Message
 
-from aiogram_bot_template.database.models import get_session, User
+from aiogram_bot_template.database.models import User
 from aiogram_bot_template.loader import _
 
 
@@ -10,8 +10,7 @@ async def _users(message: Message):
 
 
 async def _get_users_data():
-    async with get_session() as session:
-        users = await User.get_all(session)
+    users = await User.get_all()
     if not users:
         return _("Users is empty🫡"), None
     text = ""
